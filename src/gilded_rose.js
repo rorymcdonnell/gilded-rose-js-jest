@@ -2,6 +2,7 @@ const { updatedBrie } = require("./agedBrie");
 const { updatedPass } = require("./backstagePass");
 const { updatedSulfuras } = require("./sulfuras");
 const { updatedNewItem } = require("./newItem");
+const { updatedConjured } = require("./conjuredItems");
 
 class Item {
   constructor(name, sellIn, quality) {
@@ -25,6 +26,8 @@ class Shop {
         updatedPass(this.items[i]);
       } else if (this.items[i].name === "Sulfuras, Hand of Ragnaros") {
         updatedSulfuras(this.items[i]);
+      } else if (this.items[i].name.includes("Conjured")) {
+        updatedConjured(this.items[i]);
       } else {
         updatedNewItem(this.items[i]);
       }

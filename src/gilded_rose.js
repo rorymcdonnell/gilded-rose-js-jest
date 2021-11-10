@@ -1,4 +1,5 @@
 const { updatedBrie } = require("./agedBrie");
+const { updatedPass } = require("./backstagePass");
 const {
   decreaseQuality,
   increaseQuality,
@@ -59,8 +60,19 @@ class Shop {
     //   }
     // }
     // }
-    this.items.forEach(updatedBrie);
-    return this.items;
+
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].name === "Aged Brie") {
+        updatedBrie(this.items[i]);
+      }
+      if (this.items[i].name === "Backstage passes to a TAFKAL80ETC concert") {
+        updatedPass(this.items[i]);
+      }
+      return this.items;
+    }
+
+    // this.items.forEach(updatedBrie);
+    // return this.items;
   }
 }
 

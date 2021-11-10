@@ -32,7 +32,7 @@ describe("Add a new item", () => {
   });
 });
 
-describe("Aged Brie", () => {
+describe.only("Aged Brie", () => {
   it("should increase the quality of Aged Brie by 1 to be 21", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 10, 20)]);
     const items = gildedRose.updateQuality();

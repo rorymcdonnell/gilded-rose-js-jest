@@ -60,7 +60,7 @@ describe("Aged Brie", () => {
   });
 });
 
-describe.only("Sulfuras, Hand of Ragnaros", () => {
+describe("Sulfuras, Hand of Ragnaros", () => {
   it("should not allow quality to decrease even when expired", () => {
     const gildedRose = new Shop([
       new Item("Sulfuras, Hand of Ragnaros", -1, 80),
@@ -78,5 +78,59 @@ describe.only("Sulfuras, Hand of Ragnaros", () => {
 
     expect(items[0].quality).toBe(80);
     expect(items[0].sellIn).toBe(10);
+  });
+});
+
+describe.only("Backstage passes to a TAFKAL80ETC concert ", () => {
+  it("should increase quality by 1 when sellIn > 11 ", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 12, 40),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(41);
+  });
+  it("should increase the quality by 2 when 5 =< sellIn < 11", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 6, 25),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(27);
+  });
+
+  it("should increase the quality by 3 when sellIn < 5 ", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 4, 40),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(43);
+  });
+
+  it("should not increase the quality beyond 50 by adding 3 when sellIn < 6 and quality > 47", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 4, 48),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(50);
+  });
+
+  it("should not increase the quality beyond 50 by adding 2 when sellIn < 6 and quality = 49 ", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 4, 49),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(50);
+  });
+  it("should reduce the quality to 0 when sellIn = 0", () => {
+    const gildedRose = new Shop([
+      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 40),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(0);
   });
 });

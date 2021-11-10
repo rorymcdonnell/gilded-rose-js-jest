@@ -81,7 +81,7 @@ describe("Sulfuras, Hand of Ragnaros", () => {
   });
 });
 
-describe.only("Backstage passes to a TAFKAL80ETC concert ", () => {
+describe("Backstage passes to a TAFKAL80ETC concert ", () => {
   it("should increase quality by 1 when sellIn > 11 ", () => {
     const gildedRose = new Shop([
       new Item("Backstage passes to a TAFKAL80ETC concert", 12, 40),

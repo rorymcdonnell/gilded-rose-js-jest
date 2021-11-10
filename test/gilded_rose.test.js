@@ -32,7 +32,7 @@ describe("Add a new item", () => {
   });
 });
 
-describe.only("Aged Brie ", () => {
+describe("Aged Brie", () => {
   it("should increase the quality of Aged Brie by 1 to be 21", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 10, 20)]);
     const items = gildedRose.updateQuality();
@@ -57,5 +57,26 @@ describe.only("Aged Brie ", () => {
     const items = gildedRose.updateQuality();
 
     expect(items[0].quality).toBe(12);
+  });
+});
+
+describe.only("Sulfuras, Hand of Ragnaros", () => {
+  it("should not allow quality to decrease even when expired", () => {
+    const gildedRose = new Shop([
+      new Item("Sulfuras, Hand of Ragnaros", -1, 80),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(80);
+  });
+
+  it("should keep quality and sellIn constant", () => {
+    const gildedRose = new Shop([
+      new Item("Sulfuras, Hand of Ragnaros", 10, 80),
+    ]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(80);
+    expect(items[0].sellIn).toBe(10);
   });
 });

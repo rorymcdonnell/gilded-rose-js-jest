@@ -8,7 +8,7 @@ describe("Gilded Rose", function () {
   });
 });
 
-describe.only("Add a new item", () => {
+describe("Add a new item", () => {
   it("should foo", () => {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
     const items = gildedRose.updateQuality();
@@ -29,5 +29,33 @@ describe.only("Add a new item", () => {
     const gildedRose = new Shop([new Item("foo", 0, 5)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(3);
+  });
+});
+
+describe.only("Aged Brie ", () => {
+  it("should increase the quality of Aged Brie by 1 to be 21", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 10, 20)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(21);
+  });
+  it("should not increase the quality of aged brie over 50 even when expired (sellIn < 0)", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", -1, 50)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(50);
+  });
+  it("should allow a maximum quality of 50 for aged brie", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 10, 50)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(50);
+  });
+
+  it("should increase quality by 2 for aged brie when it has expired", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", -1, 10)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).toBe(12);
   });
 });

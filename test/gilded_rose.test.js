@@ -24,7 +24,7 @@ describe("Add a new item", () => {
   });
 });
 
-describe.only("Aged Brie", () => {
+describe("Aged Brie", () => {
   it("should increase the quality of Aged Brie by 1 to be 21", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 10, 20)]);
     const items = gildedRose.updateQuality();
@@ -73,7 +73,7 @@ describe("Sulfuras, Hand of Ragnaros", () => {
   });
 });
 
-describe.only("Backstage passes to a TAFKAL80ETC concert ", () => {
+describe("Backstage passes to a TAFKAL80ETC concert ", () => {
   it("should increase quality by 1 when sellIn > 11 ", () => {
     const gildedRose = new Shop([
       new Item("Backstage passes to a TAFKAL80ETC concert", 12, 40),

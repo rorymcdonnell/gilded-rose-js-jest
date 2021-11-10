@@ -13,6 +13,12 @@ class Item {
   }
 }
 
+const regularItems = [
+  "Aged Brie",
+  "Backstage passes to a TAFKAL80ETC concert",
+  "Sulfuras, Hand of Ragnaros",
+];
+
 class Shop {
   constructor(items = []) {
     this.items = items;
@@ -26,6 +32,29 @@ class Shop {
 
         if (itemExpired(this.items[i])) {
           increaseQuality(this.items[i]);
+        }
+      }
+      // Backstage passes to a TAFKAL80ETC concert
+      if (this.items[i].name === "Backstage passes to a TAFKAL80ETC concert") {
+        decreaseSellIn(this.items[i]);
+        increaseQuality(this.items[i]);
+
+        if (this.items[i].sellIn <= 5 && this.items[i].quality < 50) {
+          increaseQuality(this.items[i]);
+        }
+
+        if (this.items[i].sellIn < 5 && this.items[i].quality < 50) {
+          increaseQuality(this.items[i]);
+        }
+        itemExpired(this.items[i]);
+      }
+      // New items added
+      if (!regularItems.includes(this.items[0].name)) {
+        decreaseSellIn(this.items[0]);
+        decreaseQuality(this.items[0]);
+
+        if (itemExpired(this.items[0])) {
+          decreaseQuality(this.items[0]);
         }
       }
     }

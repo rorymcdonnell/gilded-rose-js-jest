@@ -1,13 +1,5 @@
 const { Shop, Item } = require("../src/gilded_rose");
 
-describe("Gilded Rose", function () {
-  it("should foo", function () {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe("foo");
-  });
-});
-
 describe("Add a new item", () => {
   it("should foo", () => {
     const gildedRose = new Shop([new Item("foo", 0, 0)]);
@@ -32,7 +24,7 @@ describe("Add a new item", () => {
   });
 });
 
-describe.only("Aged Brie", () => {
+describe("Aged Brie", () => {
   it("should increase the quality of Aged Brie by 1 to be 21", () => {
     const gildedRose = new Shop([new Item("Aged Brie", 10, 20)]);
     const items = gildedRose.updateQuality();
